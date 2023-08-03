@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-/* import PropTypes from 'prop-types'; */
+import PropTypes from 'prop-types';
 import style from './ContactForm.module.css';
 
 const ContactForm = ({ handleAddContact }) => {
@@ -57,6 +57,10 @@ const ContactForm = ({ handleAddContact }) => {
       </button>
     </form>
   );
+};
+
+ContactForm.propTypes = {
+  handleAddContact: PropTypes.func.isRequired,
 };
 
 export default ContactForm;

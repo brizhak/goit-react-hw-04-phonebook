@@ -1,8 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectFilterQuery, setFilter } from '../../redux/filterSlice';
 import style from './Filter.module.css';
+import { setFilteredContacts } from 'redux/contactsSlice';
+import { useEffect } from 'react';
 
-const Filter = ({ filter, handleFilter }) => {
+const Filter = () => {
+  const filter = useSelector(selectFilterQuery);
+  const dispatch = useDispatch();
+
+  const handleFilter = e => {
+    dispatch(setFilter(e.currentTarget.value));
+  };
+  useEffect(() => {
+    dispatch(setFilteredContacts(filter));
+  }, [dispatch, filter]);
   return (
     <>
       <label className={style.label}>
@@ -17,11 +28,6 @@ const Filter = ({ filter, handleFilter }) => {
       </label>
     </>
   );
-};
-
-Filter.propTypes = {
-  filter: PropTypes.string.isRequired,
-  handleFilter: PropTypes.func.isRequired,
 };
 
 export default Filter;
